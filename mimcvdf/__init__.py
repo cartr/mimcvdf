@@ -1,7 +1,9 @@
 """High level Verifiable Delay Function using keccak (sha3)."""
 from hashlib import sha3_256
 from typing import Union
-import timeit
+import time
+from statistics import mean
+from math import ceil
 
 from .mimc import forward_mimc, reverse_mimc
 """
@@ -45,5 +47,17 @@ def vdf_verify(
         hex(reverse_mimc(int(test_hash, 16), rounds)).replace('0x', '')
 
 
-def profile_cpu_speed(rounds=1000) -> float:
-    return timeit.timeit(lambda: vdf_create(b"test", rounds), number=100)
+def profile_cpu_speed(rounds=1000, seconds=1) -> float:
+    time_results = []
+    for _ in range(10000):
+        start = time.time()
+        vdf_create(b"t", rounds)
+        end = time.time()
+        time_results.append(end - start)
+    return (seconds / mean(time_results) * 1000)
+
+
+if __name__ == "__main__":
+    print("Calculate how may rounds are needed for X seconds (influenced by system processes): ")
+    seconds = int(input("Seconds: "))
+    print("Rounds:", ceil(profile_cpu_speed()))
