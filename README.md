@@ -10,7 +10,7 @@ This module was created for use in reducing spam in a similar manner to [HashCas
 ## Usage
 
 ```
-from mimchash import vdf_create, vdf_verify
+from mimcvdf import vdf_create, vdf_verify
 
 
 # Get a mimc hash of a byte sequence
