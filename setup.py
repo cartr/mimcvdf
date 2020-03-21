@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='mimcvdf',
-      version='0.0.0',
+      version='1.0.0',
       description='Generic high level VDF using MiMC',
       author='Kevin Froman',
       author_email='beardog@mailbox.org',

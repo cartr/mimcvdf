@@ -1,8 +1,6 @@
+"""Mimc hash function."""
 """
-Mimc hash function.
-"""
-"""
-This code adapted from https://github.com/OlegJakushkin/deepblockchains/blob/master/vdf/mimc/python/mimc.py by Sourabh Niyogi https://github.com/sourabhniyogi
+This module adapted from https://github.com/OlegJakushkin/deepblockchains/blob/master/vdf/mimc/python/mimc.py by Sourabh Niyogi https://github.com/sourabhniyogi
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -21,15 +19,15 @@ modulus = 2**256 - 2**32 * 351 + 1
 little_fermat_expt = (modulus*2-1)//3
 round_constants = [(i**7) ^ 42 for i in range(64)]
 
-# Forward MiMC
+
 def forward_mimc(inp: int, steps: int) -> int:
     for i in range(1,steps):
         inp = (inp**3 + round_constants[i % len(round_constants)]) % modulus
     return inp
 
 
-def reverse_mimc(mimc_output: int, steps: int) -> int:
-    rtrace = mimc_output
+def reverse_mimc(input_data: int, steps: int) -> int:
+    rtrace = input_data
 
     for i in range(steps - 1, 0, -1):
         rtrace = pow(rtrace-round_constants[i%len(round_constants)],
