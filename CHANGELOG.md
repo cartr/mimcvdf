@@ -2,6 +2,7 @@
 
 This project uses Semantic Versioning
 
-## 0.0.0
+## 1.1.0
 
-Initial release
+Added support for decimal output
+
